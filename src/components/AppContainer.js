@@ -1,11 +1,20 @@
+import NetInfo from '@react-native-community/netinfo';
 import PropTypes from 'prop-types';
 import React, { Component, Fragment } from 'react';
 import { SafeAreaView, StatusBar, View } from 'react-native';
 import { connect } from 'react-redux';
+import * as AppActions from '../redux/actions/app-actions';
 
 import {AppColors} from '../theme';
 
 class AppContainer extends Component {
+  componentDidMount() {
+    const {updateConnectivity} = this.props;
+    NetInfo.addEventListener(state =>
+      updateConnectivity(state.isInternetReachable),
+    );
+  }
+
   /**
    * Render function to display component.
    */
@@ -27,10 +36,11 @@ class AppContainer extends Component {
 
 AppContainer.propTypes = {
   children: PropTypes.any,
+  updateConnectivity: PropTypes.func.isRequired,
 };
 
 AppContainer.defaultProps = {
   children: [],
 };
 
-export default connect()(AppContainer);
+export default connect(null, AppActions)(AppContainer);

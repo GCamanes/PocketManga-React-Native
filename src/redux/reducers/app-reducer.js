@@ -1,6 +1,7 @@
 import AppConstants from '../../app/app.constants';
 
 const initialState = {
+  connectivity: false,
   loading: false,
 };
 
@@ -13,7 +14,11 @@ const appReducer = (state = initialState, action) => {
           loading: action.payload.loading,
         },
       };
-
+    case AppConstants.EVENTS.UPDATE_CONNECTIVITY:
+      return {
+        ...state,
+        connectivity: action.payload,
+      };
     default:
       return state;
   }
