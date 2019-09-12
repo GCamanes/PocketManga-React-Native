@@ -2,10 +2,12 @@
  * Combine All Reducers
  */
 import { combineReducers } from 'redux';
+import router from './router-reducer';
 import user from './user-reducer';
 
 // Combine all
 const appReducer = combineReducers({
+  router,
   user,
 });
 

@@ -4,6 +4,7 @@ const AppConstants = {
     LOGIN_SAGA: 'LOGIN_SAGA',
     LOGOUT_REDUX: 'LOGOUT_REDUX',
     LOGOUT_SAGA: 'LOGOUT_SAGA',
+    RESET_ROUTER_STATE: 'RESET_ROUTER_STATE',
   },
   ROUTES: {
     HOME: 'home',
