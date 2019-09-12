@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   ActivityIndicator,
+  Alert,
   ImageBackground,
   Switch,
   Text,
@@ -9,12 +10,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
+import AppConstants from '../../app/app.constants';
+import Storage from '../../utils/storage';
 import assets from './../../assets';
 import styles from './userLoginPage.styles';
 import * as UserActions from '../../redux/actions/user-actions';
-import { AppColors } from '../../theme';
+import {AppColors} from '../../theme';
 
 class UserLoginPage extends Component {
   constructor(props) {
@@ -26,9 +29,26 @@ class UserLoginPage extends Component {
     };
   }
 
+  componentDidMount() {
+    const {initLoginPage} = this.props;
+    const callback = (userMail, userPassword) => {
+      this.setState({
+        userMail,
+        userPassword,
+        userRemember: userMail !== '' ? true : false,
+      });
+    };
+    initLoginPage(callback);
+  }
+
   login = () => {
     const {login} = this.props;
-    login(this.state);
+    const {userMail, userPassword, userRemember} = this.state;
+    if (userMail !== '' && userPassword !== '') {
+      login(this.state);
+    } else {
+      Alert.alert('Warning', 'Please give a mail and a password.');
+    }
   }
 
   onToggleSwitchRememberMe = value => {
@@ -39,6 +59,7 @@ class UserLoginPage extends Component {
    * Render function to display component.
    */
   render() {
+    const {loadingStatus} = this.props;
     return (
       <ImageBackground source={assets.loginBackgroundOP} style={styles.backgroundImage}>
         <View style={styles.container}>
@@ -70,11 +91,17 @@ class UserLoginPage extends Component {
             />
           </View>
 
-          <TouchableOpacity
-            style={styles.loginView}
-            onPress={this.login}
-          >
-            <Text style={styles.loginText}>GO !</Text>
+          <TouchableOpacity style={styles.loginView} onPress={this.login}>
+            {loadingStatus.loading && (
+              <ActivityIndicator
+                size="large"
+                color={AppColors.palette.main.primary}
+                style={{height: 40}}
+              />
+            )}
+            {!loadingStatus.loading && (
+              <Text style={styles.loginText}>GO !</Text>
+            )}
           </TouchableOpacity>
         </View>
       </ImageBackground>
@@ -82,4 +109,22 @@ class UserLoginPage extends Component {
   }
 }
 
-export default connect(null, UserActions)(UserLoginPage);
+UserLoginPage.propTypes = {
+  initLoginPage: PropTypes.func.isRequired,
+  loadingStatus: PropTypes.object,
+  login: PropTypes.func.isRequired,
+};
+
+UserLoginPage.defaultProps = {
+  loadingStatus: {loading: false},
+};
+
+// What data from the store shall we send to the component?
+const mapStateToProps = state => ({
+  loadingStatus: state.app[AppConstants.ROUTES.USER_LOGIN],
+});
+
+export default connect(
+  mapStateToProps,
+  UserActions,
+)(UserLoginPage);

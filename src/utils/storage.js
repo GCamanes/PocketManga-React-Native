@@ -4,7 +4,6 @@ function setItem(key, value) {
   return new Promise(async (resolve, reject) => {
     try {
       await AsyncStorage.setItem(`${key}`, JSON.stringify(value));
-
       resolve();
     } catch (error) {
       console.log('STORAGE ERROR storing data', error);
