@@ -17,10 +17,8 @@ class AppContainer extends Component {
         <StatusBar barStyle="light-content" backgroundColor={AppColors.palette.black}/>
         <SafeAreaView style={{flex: 0, backgroundColor: AppColors.palette.black}} />
         <SafeAreaView style={{flex: 1, backgroundColor: AppColors.palette.black}}>
-          <View style={{flex: 1, backgroundColor: AppColors.palette.white}}>
-            {/* Main content */}
-            { children }
-          </View>
+          {/* Main content */}
+          { children }
         </SafeAreaView>
       </Fragment>
     );

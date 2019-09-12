@@ -12,12 +12,13 @@ import {SafeAreaView, Text, StatusBar} from 'react-native';
 
 import AppContainer from './components/AppContainer';
 import store from './redux/store';
+import AppRouter from './rooter/app-router';
 
 const App = () => {
   return (
     <Provider store={store}>
       <AppContainer>
-        <Text>HELLO WORLD !</Text>
+        <AppRouter />
       </AppContainer>
     </Provider>
   );
