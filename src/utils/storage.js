@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 function setItem(key, value) {
   return new Promise(async (resolve, reject) => {
