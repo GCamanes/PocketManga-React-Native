@@ -1,8 +1,13 @@
-import { AppColors } from '../theme';
+import { AppColors, AppStyles } from '../theme';
 
 const AppConfig = {
   sceneProps: {
-    hideNavBar: true,
+    hideNavBar: false,
+    titleStyle: AppStyles.navbarTitle,
+    navigationBarStyle: AppStyles.navbar,
+    navBarButtonColor: AppStyles.navbarButton.tintColor,
+    leftButtonIconStyle: AppStyles.navbarButton,
+    rightButtonIconStyle: AppStyles.navbarButton,
     sceneStyle: {
       backgroundColor: AppColors.palette.white,
     },
