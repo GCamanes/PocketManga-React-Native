@@ -5,11 +5,17 @@
   "scripts": {
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "android": "react-native run-android"
   },
   "dependencies": {
+    "prop-types": "^15.7.2",
     "react": "16.8.6",
-    "react-native": "0.60.5"
+    "react-native": "0.60.5",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
