@@ -6,7 +6,7 @@ import { Actions, Scene } from 'react-native-router-flux';
 import AppConfig from './app.config';
 import AppConstants from './app.constants';
 import HomePage from '../pages/HomePage';
-import UserLoginPage from '../pages/UserLoginPage';
+import UserLoginPage from '../pages/UserLoginPage/UserLoginPage';
 
 /* Routes */
 const AppRoutes = Actions.create(

@@ -1,4 +1,10 @@
 const colors = {
+  main: {
+    primary: '#ffffff',
+    secondary: '#000000',
+    tertiary: '#006FAA',
+    quaternary: '#22A3D6',
+  },
   black: '#000000',
   blue: '#26BEFF',
   blueOpacity: '#E9F7FF',
