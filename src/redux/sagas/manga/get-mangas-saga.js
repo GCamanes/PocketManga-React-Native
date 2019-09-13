@@ -8,7 +8,15 @@ export function* getMangasSaga(action) {
     payload: {scene: AppConstants.ROUTES.HOME, loading: true},
   });
   try {
-    console.log('\n MANGAS');
+    const mangasData = yield firebase
+      .firestore()
+      .collection(AppConstants.FIRESTORE.COLLECTION_MANGAS_LIST)
+      .doc(AppConstants.FIRESTORE.DOC_MANGAS)
+      .get();
+    yield put({
+      type: AppConstants.EVENTS.SET_MANGAS_REDUX,
+      payload: mangasData._data.list,
+    });
   } catch (error) {
     console.log('\nerror is getMangasSaga', error);
   }
