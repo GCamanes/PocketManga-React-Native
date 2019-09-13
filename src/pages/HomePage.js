@@ -10,9 +10,10 @@ import {connect} from 'react-redux';
 
 import AppConstants from '../app/app.constants';
 import MangaListItem from '../components/manga/MangaListItem';
+import MangaSectionTitle from '../components/manga/MangaSectionTitle';
 import SearchBar from '../components/searchBar/SearchBar';
 import * as MangaActions from './../redux/actions/manga-actions';
-import { AppColors, AppSizes } from '../theme';
+import {AppColors, AppSizes} from '../theme';
 
 const styles = StyleSheet.create({
   loadingView: {
@@ -49,40 +50,57 @@ class HomePage extends Component {
    * Render function to display component.
    */
   render() {
-    const {loadingStatus, mangas, mangasListNeedRefresh} = this.props;
+    const {loadingStatus, mangas} = this.props;
     if (loadingStatus.loading) {
       return (
         <View style={styles.loadingView}>
-          <ActivityIndicator size="large" color={AppColors.palette.main.secondary}/>
+          <ActivityIndicator
+            size="large"
+            color={AppColors.palette.main.secondary}
+          />
         </View>
       );
     }
     return (
-      <View style={{ flex: 1, backgroundColor: AppColors.palette.main.primary }}>
+      <View style={{flex: 1, backgroundColor: AppColors.palette.main.primary}}>
         <SearchBar
           onSearchChange={this.onSearchChange}
           onCancelSearch={this.onCancelSearch}
           value={this.state.search}
         />
-        <View style={{
+        <View
+          style={{
+            backgroundColor: AppColors.palette.main.tertiary,
             height: 2,
             width: AppSizes.screen.width,
-            backgroundColor: AppColors.palette.main.tertiary,
           }}
         />
         <SectionList
           initialNumToRender={30}
-          onEndReachedThreshold={30}
-          sections={[
-            {title: 'Favorites', data: mangas.filter((item) => (
-              item.name.toLowerCase().includes(this.state.search) && (item.isFavorite)
-              ))},
-            {title: 'Others', data: mangas.filter((item) => (
-              item.name.toLowerCase().includes(this.state.search) && (!item.isFavorite)
-              ))},
-          ]}
           keyExtractor={item => item.name}
+          onEndReachedThreshold={30}
           renderItem={({item}) => <MangaListItem manga={item} />}
+          renderSectionHeader={({section: {title}}) => (
+            <MangaSectionTitle title={title} />
+          )}
+          sections={[
+            {
+              title: 'Favorites',
+              data: mangas.filter(
+                item =>
+                  item.name.toLowerCase().includes(this.state.search) &&
+                  item.isFavorite,
+              ),
+            },
+            {
+              title: 'Others',
+              data: mangas.filter(
+                item =>
+                  item.name.toLowerCase().includes(this.state.search) &&
+                  !item.isFavorite,
+              ),
+            },
+          ]}
         />
       </View>
     );
