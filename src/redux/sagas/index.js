@@ -1,8 +1,9 @@
+import getMangasSaga from './manga/get-mangas-saga';
 import loginSaga from './user/login-saga';
-
-import { all } from 'redux-saga/effects';
+import {all} from 'redux-saga/effects';
 
 const sagas = [
+  getMangasSaga(),
   loginSaga(),
 ];
 

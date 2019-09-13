@@ -114,7 +114,7 @@ class UserLoginPage extends Component {
 }
 
 UserLoginPage.propTypes = {
-  connectivity: PropTypes.string.isRequired,
+  connectivity: PropTypes.bool.isRequired,
   initLoginPage: PropTypes.func.isRequired,
   loadingStatus: PropTypes.object,
   login: PropTypes.func.isRequired,

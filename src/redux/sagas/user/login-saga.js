@@ -58,6 +58,6 @@ export function* loginSaga(action) {
  * @returns {IterableIterator<ForkEffect>}
  */
 export default function* watch() {
-  yield takeLatest(AppConstants.EVENTS.INIT_LOGIN_PAGE, initLoginPage);
+  yield takeLatest(AppConstants.EVENTS.INIT_LOGIN_PAGE_SAGA, initLoginPage);
   yield takeLatest(AppConstants.EVENTS.LOGIN_SAGA, loginSaga);
 }
