@@ -5,6 +5,7 @@ import {Alert, Text, View, Image, TouchableOpacity} from 'react-native';
 
 import assets from '../../assets';
 import styles from './mangaListItem.styles';
+import * as MangaActions from '../../redux/actions/manga-actions';
 import { AppColors } from '../../theme';
 
 export class MangaListItem extends React.Component {
@@ -23,8 +24,8 @@ export class MangaListItem extends React.Component {
   };
 
   onFavoritePress = () => {
-    const { id, isMangaFavorite } = this.props.manga;
-    // this.props.markMangaAsFavorite(id, !isMangaFavorite);
+    const {manga, markMangaAsFavorite} = this.props;
+    markMangaAsFavorite(manga.name, !manga.isFavorite);
   }
 
   render() {
@@ -77,6 +78,7 @@ export class MangaListItem extends React.Component {
 MangaListItem.propTypes = {
   connectivity: PropTypes.bool.isRequired,
   manga: PropTypes.object.isRequired,
+  markMangaAsFavorite: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -85,5 +87,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null,
+  MangaActions,
 )(MangaListItem);

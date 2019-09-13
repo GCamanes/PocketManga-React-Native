@@ -11,6 +11,19 @@ const mangaReducer = (state = initialState, action) => {
         ...state,
         mangas: action.payload,
       };
+    case AppConstants.EVENTS.MANGA_MARKED_AS_FAVORITE: {
+      const manga = state.mangas.find(
+        item => item.name === action.payload.manga,
+      );
+      manga.isFavorite = action.payload.isFavorite;
+      const others = state.mangas.filter(
+        item => item.name !== action.payload.manga,
+      );
+      return {
+        ...state,
+        mangas: [...others, manga].sort((a, b) => a.number - b.number),
+      };
+    }
     default:
       return state;
   }

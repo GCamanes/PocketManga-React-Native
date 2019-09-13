@@ -49,7 +49,7 @@ class HomePage extends Component {
    * Render function to display component.
    */
   render() {
-    const {loadingStatus, mangas} = this.props;
+    const {loadingStatus, mangas, mangasListNeedRefresh} = this.props;
     if (loadingStatus.loading) {
       return (
         <View style={styles.loadingView}>
