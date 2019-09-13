@@ -42,12 +42,16 @@ class UserLoginPage extends Component {
   }
 
   login = () => {
-    const {login} = this.props;
+    const {connectivity, login} = this.props;
     const {userMail, userPassword, userRemember} = this.state;
-    if (userMail !== '' && userPassword !== '') {
-      login(this.state);
+    if (connectivity) {
+      if (userMail !== '' && userPassword !== '') {
+        login(this.state);
+      } else {
+        Alert.alert('Warning', 'Please give a mail and a password.');
+      }
     } else {
-      Alert.alert('Warning', 'Please give a mail and a password.');
+      Alert.alert('Warning', 'No internet connection.');
     }
   }
 
@@ -110,6 +114,7 @@ class UserLoginPage extends Component {
 }
 
 UserLoginPage.propTypes = {
+  connectivity: PropTypes.string.isRequired,
   initLoginPage: PropTypes.func.isRequired,
   loadingStatus: PropTypes.object,
   login: PropTypes.func.isRequired,
@@ -121,6 +126,7 @@ UserLoginPage.defaultProps = {
 
 // What data from the store shall we send to the component?
 const mapStateToProps = state => ({
+  connectivity: state.app.connectivity,
   loadingStatus: state.app[AppConstants.ROUTES.USER_LOGIN],
 });
 

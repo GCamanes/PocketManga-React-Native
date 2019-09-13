@@ -1,3 +1,5 @@
+import firebase from 'react-native-firebase';
+import {Alert} from 'react-native';
 import {put, takeLatest} from 'redux-saga/effects';
 import {Actions} from 'react-native-router-flux';
 
@@ -28,9 +30,11 @@ export function* loginSaga(action) {
     payload: {scene: AppConstants.ROUTES.USER_LOGIN, loading: true},
   });
   try {
-    if (action.payload.userRemember) {
-      yield Storage.setItem('userMail', action.payload.userMail);
-      yield Storage.setItem('userPassword', action.payload.userPassword);
+    const {userMail, userPassword, userRemember} = action.payload
+    yield firebase.auth().signInWithEmailAndPassword(userMail, userPassword);
+    if (userRemember) {
+      yield Storage.setItem('userMail', userMail);
+      yield Storage.setItem('userPassword', userPassword);
     } else {
       yield Storage.removeItem('userMail');
       yield Storage.removeItem('userPassword');
@@ -40,6 +44,7 @@ export function* loginSaga(action) {
     Actions.jump(AppConstants.ROUTES.HOME);
   } catch (error) {
     console.log('error', error);
+    Alert.alert('Error', 'Wrong mail or password.');
   }
   yield put({
     type: AppConstants.EVENTS.SET_LOADER,

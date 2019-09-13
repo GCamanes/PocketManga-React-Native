@@ -35,9 +35,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   input: {
-    width: AppSizes.screen.widthThreeQuarters,
+    width: AppSizes.screen.width * 0.9,
     height: 40,
     marginVertical: 5,
+    paddingVertical: 0,
     paddingHorizontal: 10,
     color: AppColors.palette.main.tertiary,
     backgroundColor: AppColors.palette.main.primary,
@@ -45,6 +46,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 2,
     fontSize: AppFonts.t16.size,
+    textAlign: 'center',
+    textAlignVertical: 'center',
   },
   rememberUserView: {
     width: AppSizes.screen.widthThreeQuarters,
