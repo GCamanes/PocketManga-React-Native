@@ -4,6 +4,7 @@ const assets = {
   favoriteOn: require('./favorite-on-icon.png'),
   loginBackground: require('./login-background.jpg'),
   loginBackgroundOP: require('./login-background-one-piece.jpg'),
+  logout: require('./logout-icon.png'),
   search: require('./search-icon.png'),
 };
 

@@ -1,11 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import {
-  ActivityIndicator,
-  SectionList,
-  StyleSheet,
-  View,
-} from 'react-native';
+import React, {Component} from 'react';
+import {ActivityIndicator, SectionList, StyleSheet, View} from 'react-native';
 import {connect} from 'react-redux';
 
 import AppConstants from '../app/app.constants';
@@ -44,7 +39,7 @@ class HomePage extends Component {
 
   onCancelSearch = () => {
     this.setState({search: ''});
-  }
+  };
 
   /**
    * Render function to display component.
