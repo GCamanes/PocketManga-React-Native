@@ -3,6 +3,7 @@
  */
 import {combineReducers} from 'redux';
 import app from './app-reducer';
+import chapter from './chapter-reducer';
 import manga from './manga-reducer';
 import router from './router-reducer';
 import user from './user-reducer';
@@ -10,6 +11,7 @@ import user from './user-reducer';
 // Combine all
 const appReducer = combineReducers({
   app,
+  chapter,
   manga,
   router,
   user,

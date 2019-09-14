@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {ActivityIndicator, SectionList, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, SectionList, View} from 'react-native';
 import {connect} from 'react-redux';
 
 import AppConstants from '../app/app.constants';
@@ -8,16 +8,7 @@ import MangaListItem from '../components/manga/MangaListItem';
 import MangaSectionTitle from '../components/manga/MangaSectionTitle';
 import SearchBar from '../components/searchBar/SearchBar';
 import * as MangaActions from './../redux/actions/manga-actions';
-import {AppColors, AppSizes} from '../theme';
-
-const styles = StyleSheet.create({
-  loadingView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: AppColors.palette.main.primary,
-  },
-});
+import {AppColors, AppSizes, AppStyles} from '../theme';
 
 class HomePage extends Component {
   constructor(props) {
@@ -48,7 +39,7 @@ class HomePage extends Component {
     const {loadingStatus, mangas} = this.props;
     if (loadingStatus.loading) {
       return (
-        <View style={styles.loadingView}>
+        <View style={AppStyles.loadingView}>
           <ActivityIndicator
             size="large"
             color={AppColors.palette.main.secondary}
@@ -105,14 +96,14 @@ class HomePage extends Component {
 HomePage.propTypes = {
   getMangas: PropTypes.func.isRequired,
   loadingStatus: PropTypes.object,
-  mangas: PropTypes.arrayOf(PropTypes.object.isRequired),
+  mangas: PropTypes.arrayOf(PropTypes.object),
 };
 
 HomePage.defaultProps = {
   loadingStatus: {loading: false},
+  mangas: [],
 };
 
-// What data from the store shall we send to the component?
 const mapStateToProps = state => ({
   loadingStatus: state.app[AppConstants.ROUTES.HOME],
   mangas: state.manga.mangas,

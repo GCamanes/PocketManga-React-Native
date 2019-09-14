@@ -1,8 +1,16 @@
 import Colors from './colors';
 import Fonts from './fonts';
 import Sizes from './sizes';
+import {AppColors} from './index';
 
 export default {
+  // loading
+  loadingView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: AppColors.palette.main.primary,
+  },
   // Navbar
   navbar: {
     backgroundColor: Colors.palette.black,

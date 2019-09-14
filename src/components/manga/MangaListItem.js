@@ -5,8 +5,9 @@ import {Alert, Text, View, Image, TouchableOpacity} from 'react-native';
 
 import assets from '../../assets';
 import styles from './mangaListItem.styles';
+import * as ChapterActions from '../../redux/actions/chapter-actions';
 import * as MangaActions from '../../redux/actions/manga-actions';
-import { AppColors } from '../../theme';
+import {AppColors} from '../../theme';
 
 export class MangaListItem extends React.Component {
   constructor(props) {
@@ -14,10 +15,9 @@ export class MangaListItem extends React.Component {
   }
 
   onPressItem = () => {
-    if (this.props.connectivity) {
-      /* this.props.navigation.navigate('Chapters', {
-        manga: this.props.manga.id,
-      }); */
+    const {connectivity, getChapters, manga} = this.props;
+    if (connectivity) {
+      getChapters(manga.name);
     } else {
       Alert.alert('Warning', 'No internet connection.');
     }
@@ -70,13 +70,14 @@ export class MangaListItem extends React.Component {
             source={manga.isFavorite ? assets.favoriteOn : assets.favoriteOff}
           />
         </TouchableOpacity>
-      </View >
+      </View>
     );
   }
 }
 
 MangaListItem.propTypes = {
   connectivity: PropTypes.bool.isRequired,
+  getChapters: PropTypes.func.isRequired,
   manga: PropTypes.object.isRequired,
   markMangaAsFavorite: PropTypes.func.isRequired,
 };
@@ -87,5 +88,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  MangaActions,
+  {...MangaActions, ...ChapterActions},
 )(MangaListItem);
