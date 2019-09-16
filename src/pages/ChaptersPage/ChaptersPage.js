@@ -22,10 +22,10 @@ class ChaptersPage extends Component {
     const numberOfSections = this.getNumberOfSections(chapters[0].number);
     const sections = [];
     for (let i = numberOfSections - 1; i >= 0; i--) {
-      let title = `${i * AppConstants.GENERAL.CHAPTERS_PER_SECTION} to ${(i + 1) * AppConstants.GENERAL.CHAPTERS_PER_SECTION - 1}`;
+      let title = `chapters ${i * AppConstants.GENERAL.CHAPTERS_PER_SECTION} to ${(i + 1) * AppConstants.GENERAL.CHAPTERS_PER_SECTION - 1}`;
       let expanded = false;
       if (i === numberOfSections - 1) {
-        title = `${i * AppConstants.GENERAL.CHAPTERS_PER_SECTION} to ${
+        title = `chapters ${i * AppConstants.GENERAL.CHAPTERS_PER_SECTION} to ${
           chapters[0].number
         }`;
         expanded = true;

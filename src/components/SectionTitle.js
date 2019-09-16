@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: AppColors.palette.blueOpacity,
+    backgroundColor: AppColors.palette.white,
   },
   sectionTitleText: {
     width: AppSizes.screen.width * 0.4,

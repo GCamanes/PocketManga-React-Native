@@ -6,11 +6,31 @@ import ChapterListItem from './ChapterListItem';
 import SectionTitle from '../SectionTitle';
 import assets from '../../assets';
 import ChaptersContainer from './ChaptersContainer';
+import {AppColors, AppFonts} from '../../theme';
 
 const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    flexDirection: 'row',
+    height: 50,
+    alignItems: 'center',
+    paddingVertical: 2,
+    paddingHorizontal: 20,
+    backgroundColor: AppColors.palette.grey,
+    borderWidth: 3,
+    margin: 4,
+  },
   image: {
-    height: 30,
-    width: 30,
+    height: 40,
+    width: 40,
+  },
+  titleView: {
+    flex: 1,
+  },
+  title: {
+    fontSize: AppFonts.t20.size,
+    color: AppColors.palette.main.tertiary,
+    fontWeight: 'bold',
   },
 });
 
@@ -46,21 +66,13 @@ class SectionChaptersList extends Component {
     const {expanded} = this.state;
     return (
       <View>
-        <TouchableOpacity onPress={this.toggleExpand}>
-          <SectionTitle
-            title={title}
-            imageLeft={
-              <Image
-                source={expanded ? assets.downArrow : assets.rightArrow}
-                style={{...styles.image, marginRight: 35}}
-              />
-            }
-            imageRight={
-              <Image
-                source={expanded ? assets.downArrow : assets.leftArrow}
-                style={{...styles.image, marginLeft: 35}}
-              />
-            }
+        <TouchableOpacity onPress={this.toggleExpand} style={styles.view}>
+          <View style={styles.titleView}>
+            <Text style={styles.title}>{title}</Text>
+          </View>
+          <Image
+            source={expanded ? assets.upChevron : assets.downChevron}
+            style={{...styles.image, marginLeft: 35}}
           />
         </TouchableOpacity>
         {expanded && <View>{this.renderChaptersitem()}</View>}

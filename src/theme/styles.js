@@ -5,7 +5,7 @@ import {AppColors} from './index';
 export default {
   mainView: {
     flex: 1,
-    backgroundColor: AppColors.palette.blueOpacity,
+    backgroundColor: AppColors.palette.white,
   },
   // loading
   loadingView: {
