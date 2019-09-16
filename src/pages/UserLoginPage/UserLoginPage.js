@@ -13,8 +13,7 @@ import {
 import {connect} from 'react-redux';
 
 import AppConstants from '../../app/app.constants';
-import Storage from '../../utils/storage';
-import assets from './../../assets';
+import assets from '../../assets';
 import styles from './userLoginPage.styles';
 import * as UserActions from '../../redux/actions/user-actions';
 import {AppColors} from '../../theme';

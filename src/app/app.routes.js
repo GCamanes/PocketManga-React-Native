@@ -8,6 +8,7 @@ import AppConstants from './app.constants';
 import ChaptersPage from '../pages/ChaptersPage/ChaptersPage';
 import HomePage from '../pages/HomePage';
 import LogoutButton from '../components/LogoutButton';
+import ScansPage from '../pages/ScansPage/ScansPage';
 import UserLoginPage from '../pages/UserLoginPage/UserLoginPage';
 
 /* Routes */
@@ -16,6 +17,7 @@ const AppRoutes = Actions.create(
     <Scene key={AppConstants.ROUTES.CHAPTERS} component={ChaptersPage} />
     <Scene key={AppConstants.ROUTES.HOME} component={HomePage} title={"Pocket Manga"} renderLeftButton={<LogoutButton/>} />
     <Scene key={AppConstants.ROUTES.USER_LOGIN} component={UserLoginPage} hideNavBar initial />
+    <Scene key={AppConstants.ROUTES.SCANS} component={ScansPage} />
   </Scene>,
 );
 

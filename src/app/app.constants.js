@@ -22,14 +22,19 @@ const AppConstants = {
     SET_CHAPTERS_REDUX: 'SET_CHAPTERS_REDUX',
     CHAPTER_MARKED_AS_READ: 'CHAPTER_MARKED_AS_READ',
     MARK_CHAPTER_READ_SAGA: 'MARK_CHAPTER_READ_SAGA',
+    // scan
+    GET_SCANS_SAGA: 'GET_SCANS_SAGA',
+    SET_SCANS_REDUX: 'SET_SCANS_REDUX',
     // clear
     CLEAR_APP_REDUCER: 'CLEAR_APP_REDUCER',
     CLEAR_MANGAS_REDUCER: 'CLEAR_MANGAS_REDUCER',
     CLEAR_CHAPTERS_REDUCER: 'CLEAR_CHAPTERS_REDUCER',
+    CLEAR_SCANS_REDUCER: 'CLEAR_SCANS_REDUCER',
   },
   FIRESTORE: {
     COLLECTION_MANGAS_LIST: 'mangasList',
     COLLECTION_MANGAS_CHAPTERS: 'mangasChapters',
+    COLLECTION_CHAPTERS: 'chapters',
     DOC_MANGAS: 'mangas',
   },
   GENERAL: {
@@ -39,6 +44,7 @@ const AppConstants = {
     CHAPTERS: 'chapters',
     HOME: 'home',
     LOADING: 'loading',
+    SCANS: 'scans',
     USER_LOGIN: 'user_login',
   },
 };

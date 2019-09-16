@@ -6,6 +6,7 @@ import app from './app-reducer';
 import chapter from './chapter-reducer';
 import manga from './manga-reducer';
 import router from './router-reducer';
+import scan from './scan-reducer';
 import user from './user-reducer';
 
 // Combine all
@@ -14,6 +15,7 @@ const appReducer = combineReducers({
   chapter,
   manga,
   router,
+  scan,
   user,
 });
 

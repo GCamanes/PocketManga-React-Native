@@ -1,6 +1,7 @@
 import exitSaga from './user/exit-saga';
 import getChaptersSaga from './chapter/get-chapters-saga';
 import getMangasSaga from './manga/get-mangas-saga';
+import getScansSaga from './scan/get-scans-saga';
 import loginSaga from './user/login-saga';
 import logoutSaga from './user/logout-saga';
 import markChapterReadSaga from './chapter/mark-chapter-read-saga';
@@ -11,6 +12,7 @@ const sagas = [
   exitSaga(),
   getChaptersSaga(),
   getMangasSaga(),
+  getScansSaga(),
   loginSaga(),
   logoutSaga(),
   markChapterReadSaga(),

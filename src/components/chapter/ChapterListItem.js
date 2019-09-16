@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {AppColors, AppSizes} from '../../theme';
 import * as ChapterActions from '../../redux/actions/chapter-actions';
-
+import * as ScansActions from '../../redux/actions/scan-actions';
 
 const styles = StyleSheet.create({
   chapterItemView: {
@@ -23,7 +23,10 @@ const styles = StyleSheet.create({
 
 export class ChapterListItem extends React.Component {
   onPressItem = () => {
-    if (this.props.connectivity) {} else {
+    const {chapter, getScans, manga} = this.props;
+    if (this.props.connectivity) {
+      getScans(manga, chapter);
+    } else {
       Alert.alert('Warning', 'No internet connection.');
     }
   }
@@ -61,6 +64,7 @@ export class ChapterListItem extends React.Component {
 
 ChapterListItem.propTypes = {
   connectivity: PropTypes.bool.isRequired,
+  getScans: PropTypes.func.isRequired,
   manga: PropTypes.string.isRequired,
   chapter: PropTypes.shape({
     id: PropTypes.string.isRequired,
@@ -75,5 +79,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  ChapterActions,
+  {...ChapterActions, ...ScansActions},
 )(ChapterListItem);
