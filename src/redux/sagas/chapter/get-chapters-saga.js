@@ -37,11 +37,11 @@ export function* getChaptersSaga(action) {
     var promisesChapter = [];
     chaptersData._data.chaptersList.map(item => {
       promisesChapter.push(
-        Storage.getItem(item, 'off').then(isChapterRead => {
+        Storage.getItem(item, 'off').then(isRead => {
           return {
             id: item,
             number: getChapterNumber(item),
-            isChapterRead: isChapterRead === 'on',
+            isRead: isRead === 'on',
           };
         }),
       );

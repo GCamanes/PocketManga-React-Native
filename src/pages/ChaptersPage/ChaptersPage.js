@@ -61,7 +61,7 @@ class ChaptersPage extends Component {
   }
 
   render() {
-    const {manga, loadingStatus} = this.props;
+    const {loadingStatus} = this.props;
     if (loadingStatus.loading) {
       return (
         <View style={AppStyles.loadingView}>

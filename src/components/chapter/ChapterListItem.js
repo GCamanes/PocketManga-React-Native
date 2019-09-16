@@ -3,6 +3,7 @@ import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {AppColors, AppSizes} from '../../theme';
+import * as ChapterActions from '../../redux/actions/chapter-actions';
 
 
 const styles = StyleSheet.create({
@@ -28,28 +29,30 @@ export class ChapterListItem extends React.Component {
   }
 
   onLongPressItem = () => {
-    const {id, isChapterRead} = this.props.chapter;
-    //this.props.markChapterAsRead(id, !isChapterRead);
+    const {chapter, markChapterAsRead} = this.props;
+    markChapterAsRead(chapter.id, !chapter.isRead);
   }
 
   render() {
+    const {chapter} = this.props;
+    console.log('RENDER CHAPTER ITEM', chapter);
     return (
       <TouchableOpacity onPress={this.onPressItem} onLongPress={this.onLongPressItem} delayLongPress={500}>
         <View
           style={{
             ...styles.chapterItemView,
-            backgroundColor: this.props.chapter.isChapterRead
+            backgroundColor: chapter.isRead
               ? AppColors.palette.main.quaternary
               : AppColors.palette.main.primary,
           }}>
           <Text
             style={{
               ...styles.chapterItemText,
-              color: this.props.chapter.isChapterRead
+              color: chapter.isRead
                 ? AppColors.palette.main.primary
                 : AppColors.palette.main.tertiary,
             }}>
-            {this.props.chapter.number}
+            {chapter.number}
           </Text>
         </View>
       </TouchableOpacity>
@@ -63,8 +66,9 @@ ChapterListItem.propTypes = {
   chapter: PropTypes.shape({
     id: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
-    isChapterRead: PropTypes.bool.isRequired,
+    isRead: PropTypes.bool.isRequired,
   }),
+  markChapterAsRead: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => ({
   connectivity: state.app.connectivity,
@@ -72,5 +76,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null,
+  ChapterActions,
 )(ChapterListItem);

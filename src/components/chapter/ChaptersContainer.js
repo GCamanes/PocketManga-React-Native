@@ -2,13 +2,12 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {View} from 'react-native';
 import ChapterListItem from './ChapterListItem';
-import { AppColors } from '../../theme';
 
 class ChaptersContainer extends Component {
   render() {
     const {chapter_1, chapter_2, chapter_3, manga} = this.props;
     return (
-      <View style={{flexDirection: 'row', margin: 2}}>
+      <View style={{flexDirection: 'row', marginHorizontal: 4, marginVertical: 2}}>
         <View style={{flex: 1}}>
           {chapter_1 && <ChapterListItem manga={manga} chapter={chapter_1} />}
         </View>

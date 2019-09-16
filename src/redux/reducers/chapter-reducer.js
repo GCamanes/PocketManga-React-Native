@@ -12,8 +12,17 @@ const chapterReducer = (state = initialState, action) => {
         chapters: action.payload,
       };
     case AppConstants.EVENTS.CHAPTER_MARKED_AS_READ: {
+      const chapter = state.chapters.find(
+        item => item.id === action.payload.id,
+      );
+      let newChapter = {...chapter};
+      newChapter.isRead = action.payload.isRead;
+      const others = state.chapters.filter(
+        item => item.id !== action.payload.id,
+      );
       return {
         ...state,
+        chapters: [...others, newChapter].sort((a, b) => b.number - a.number)
       };
     }
     default:
