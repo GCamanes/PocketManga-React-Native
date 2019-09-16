@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import ArrayFunctions from '../../utils/arrays';
 import ChapterListItem from './ChapterListItem';
-import SectionTitle from '../manga/SectionTitle';
+import SectionTitle from '../SectionTitle';
 import assets from '../../assets';
+import ChaptersContainer from './ChaptersContainer';
 
 const styles = StyleSheet.create({
   image: {
@@ -25,8 +27,22 @@ class SectionChaptersList extends Component {
     this.setState({expanded: !expanded});
   };
 
+  renderChaptersitem = () => {
+    const {data, manga} = this.props;
+    const chunckedData = ArrayFunctions.getChunckedArray(3, data);
+    return chunckedData.map(item => (
+      <ChaptersContainer
+        chapter_1={item[0]}
+        chapter_2={item.length >= 2 ? item[1] : null}
+        chapter_3={item.length >= 3 ? item[2] : null}
+        key={item[0].id}
+        manga={manga}
+      />
+    ));
+  };
+
   render() {
-    const {data, manga, title} = this.props;
+    const {title} = this.props;
     const {expanded} = this.state;
     return (
       <View>
@@ -47,10 +63,7 @@ class SectionChaptersList extends Component {
             }
           />
         </TouchableOpacity>
-        {expanded &&
-          data.map(item => (
-            <ChapterListItem manga={manga} chapter={item} key={item.id} />
-          ))}
+        {expanded && <View>{this.renderChaptersitem()}</View>}
       </View>
     );
   }

@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import AppConstants from '../app/app.constants';
 import MangaListItem from '../components/manga/MangaListItem';
-import SectionTitle from '../components/manga/SectionTitle';
+import SectionTitle from '../components/SectionTitle';
 import SearchBar from '../components/searchBar/SearchBar';
 import * as MangaActions from './../redux/actions/manga-actions';
 import {AppColors, AppSizes, AppStyles} from '../theme';

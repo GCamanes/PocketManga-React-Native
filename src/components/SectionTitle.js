@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import {AppColors, AppSizes} from '../../theme';
+import {AppColors, AppSizes} from '../theme';
 
 const styles = StyleSheet.create({
   sectionTitleView: {
@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: AppColors.palette.main.primary,
+    backgroundColor: AppColors.palette.blueOpacity,
   },
   sectionTitleText: {
     width: AppSizes.screen.width * 0.4,
