@@ -1,9 +1,12 @@
 import Colors from './colors';
 import Fonts from './fonts';
-import Sizes from './sizes';
 import {AppColors} from './index';
 
 export default {
+  mainView: {
+    flex: 1,
+    backgroundColor: AppColors.palette.main.primary,
+  },
   // loading
   loadingView: {
     flex: 1,

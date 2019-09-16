@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import PropTypes from 'prop-types';
 import {AppColors, AppSizes} from '../../theme';
 
 const styles = StyleSheet.create({
@@ -27,21 +28,32 @@ const styles = StyleSheet.create({
   },
 });
 
-class MangaSectionTitle extends React.Component {
+class SectionTitle extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const {title} = this.props;
+    const {title, imageLeft, imageRight} = this.props;
     return (
       <View style={styles.sectionTitleView}>
-        <View style={styles.barView} />
+        {imageLeft ? imageLeft : <View style={styles.barView} />}
         <Text style={styles.sectionTitleText}>{title}</Text>
-        <View style={styles.barView} />
+        {imageRight ? imageRight : <View style={styles.barView} />}
       </View>
-    )
+    );
   }
+}
+
+SectionTitle.propTypes = {
+  imageLeft: PropTypes.any,
+  imageRight: PropTypes.any,
+  title: PropTypes.string.isRequired,
 };
 
-export default MangaSectionTitle;
+SectionTitle.defaultProps = {
+  imageLeft: null,
+  imageRight: null,
+};
+
+export default SectionTitle;

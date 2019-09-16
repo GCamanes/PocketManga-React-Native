@@ -37,7 +37,7 @@ export function* getChaptersSaga(action) {
     var promisesChapter = [];
     chaptersData._data.chaptersList.map(item => {
       promisesChapter.push(
-        Storage.getItem(item.name, 'off').then(isChapterRead => {
+        Storage.getItem(item, 'off').then(isChapterRead => {
           return {
             id: item,
             number: getChapterNumber(item),
@@ -49,7 +49,7 @@ export function* getChaptersSaga(action) {
     const chapters = yield Promise.all(promisesChapter);
     yield put({
       type: AppConstants.EVENTS.SET_CHAPTERS_REDUX,
-      payload: chapters,
+      payload: chapters.sort((a, b) => b.number - a.number),
     });
   } catch (error) {
     console.log('\nerror is getChaptersSaga', error);

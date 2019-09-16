@@ -27,6 +27,9 @@ const AppConstants = {
     COLLECTION_MANGAS_CHAPTERS: 'mangasChapters',
     DOC_MANGAS: 'mangas',
   },
+  GENERAL: {
+    CHAPTERS_PER_SECTION: 50,
+  },
   ROUTES: {
     CHAPTERS: 'chapters',
     HOME: 'home',

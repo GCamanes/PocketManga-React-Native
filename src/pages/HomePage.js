@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import AppConstants from '../app/app.constants';
 import MangaListItem from '../components/manga/MangaListItem';
-import MangaSectionTitle from '../components/manga/MangaSectionTitle';
+import SectionTitle from '../components/manga/SectionTitle';
 import SearchBar from '../components/searchBar/SearchBar';
 import * as MangaActions from './../redux/actions/manga-actions';
 import {AppColors, AppSizes, AppStyles} from '../theme';
@@ -48,7 +48,7 @@ class HomePage extends Component {
       );
     }
     return (
-      <View style={{flex: 1, backgroundColor: AppColors.palette.main.primary}}>
+      <View style={AppStyles.mainView}>
         <SearchBar
           onSearchChange={this.onSearchChange}
           onCancelSearch={this.onCancelSearch}
@@ -67,7 +67,7 @@ class HomePage extends Component {
           onEndReachedThreshold={30}
           renderItem={({item}) => <MangaListItem manga={item} />}
           renderSectionHeader={({section: {title}}) => (
-            <MangaSectionTitle title={title} />
+            <SectionTitle title={title} />
           )}
           sections={[
             {
