@@ -8,7 +8,6 @@
 
 import React, {Fragment} from 'react';
 import {Provider} from 'react-redux';
-import {SafeAreaView, Text, StatusBar} from 'react-native';
 
 import AppContainer from './components/AppContainer';
 import store from './redux/store';

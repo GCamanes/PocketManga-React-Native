@@ -24,6 +24,10 @@ const mangaReducer = (state = initialState, action) => {
         mangas: [...others, manga].sort((a, b) => a.number - b.number),
       };
     }
+    case AppConstants.EVENTS.CLEAR_MANGAS_REDUCER:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }

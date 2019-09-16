@@ -35,7 +35,6 @@ export class ChapterListItem extends React.Component {
 
   render() {
     const {chapter} = this.props;
-    console.log('RENDER CHAPTER ITEM', chapter);
     return (
       <TouchableOpacity onPress={this.onPressItem} onLongPress={this.onLongPressItem} delayLongPress={500}>
         <View

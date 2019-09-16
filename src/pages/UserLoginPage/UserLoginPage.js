@@ -65,7 +65,7 @@ class UserLoginPage extends Component {
   render() {
     const {loadingStatus} = this.props;
     return (
-      <ImageBackground source={assets.loginBackgroundOP} style={styles.backgroundImage}>
+      <ImageBackground source={assets.loginBackground} style={styles.backgroundImage}>
         <View style={styles.container}>
           <TextInput
             value={this.state.userMail}

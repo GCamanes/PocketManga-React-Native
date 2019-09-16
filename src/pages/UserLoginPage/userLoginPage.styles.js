@@ -16,16 +16,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 80,
   },
-  inputView: {
-    width: AppSizes.screen.widthThreeQuarters,
-    height: 130,
-    marginRight: 5,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   loginView: {
-    width: AppSizes.screen.widthThreeQuarters,
+    width: AppSizes.screen.widthHalf,
     height: AppSizes.screen.widthQuarter / 2,
     alignItems: 'center',
     justifyContent: 'center',
@@ -35,7 +27,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   input: {
-    width: AppSizes.screen.width * 0.9,
+    width: AppSizes.screen.width * 0.8,
     height: 40,
     marginVertical: 5,
     paddingVertical: 0,
@@ -46,7 +38,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 2,
     fontSize: AppFonts.t16.size,
-    textAlign: 'center',
     textAlignVertical: 'center',
   },
   rememberUserView: {

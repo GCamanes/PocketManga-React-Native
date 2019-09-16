@@ -25,6 +25,10 @@ const chapterReducer = (state = initialState, action) => {
         chapters: [...others, newChapter].sort((a, b) => b.number - a.number)
       };
     }
+    case AppConstants.EVENTS.CLEAR_CHAPTERS_REDUCER:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }

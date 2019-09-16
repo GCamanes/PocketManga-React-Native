@@ -19,6 +19,10 @@ const appReducer = (state = initialState, action) => {
         ...state,
         connectivity: action.payload,
       };
+    case AppConstants.EVENTS.CLEAR_APP_REDUCER:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }
