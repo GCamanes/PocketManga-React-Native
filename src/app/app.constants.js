@@ -25,6 +25,8 @@ const AppConstants = {
     // scan
     GET_SCANS_SAGA: 'GET_SCANS_SAGA',
     SET_SCANS_REDUX: 'SET_SCANS_REDUX',
+    GET_SCAN_INFOS_SAGA: 'GET_SCAN_INFOS_SAGA',
+    SET_SCAN_INFOS_REDUX: 'SET_SCAN_INFOS_REDUX',
     // clear
     CLEAR_APP_REDUCER: 'CLEAR_APP_REDUCER',
     CLEAR_MANGAS_REDUCER: 'CLEAR_MANGAS_REDUCER',
@@ -45,6 +47,7 @@ const AppConstants = {
     HOME: 'home',
     LOADING: 'loading',
     SCANS: 'scans',
+    SCAN_INFOS: 'scan_infos',
     USER_LOGIN: 'user_login',
   },
 };

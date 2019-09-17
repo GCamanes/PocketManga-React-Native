@@ -1,12 +1,28 @@
 import {Platform, StatusBar, StyleSheet} from 'react-native';
 import {AppColors, AppFonts, AppSizes, AppStyles} from '../../theme';
 
+const bottomHeight = 50;
+
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
     backgroundColor: AppColors.palette.white,
-    flexDirection: 'row',
     alignItems: 'center',
+  },
+  swipeView: {
+    backgroundColor: AppColors.palette.white,
+    height:
+      Platform.OS === 'android'
+        ? AppSizes.screen.height - AppStyles.navbar.height - StatusBar.currentHeight - bottomHeight
+        : AppSizes.screen.height - AppStyles.navbar.height - styles.bottomView.height - bottomHeight,
+    width: AppSizes.screen.width,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bottomView: {
+    height: bottomHeight,
+    width: AppSizes.screen.width,
+    backgroundColor: AppColors.palette.main.tertiary,
   },
   leftSideView: {
     width: AppSizes.screen.width * 0.09,
@@ -35,7 +51,7 @@ const styles = StyleSheet.create({
     width: AppSizes.screen.width * 0.1,
   },
   centerView: {
-    backgroundColor: AppColors.palette.grey,
+    backgroundColor: AppColors.palette.white,
     height:
       Platform.OS === 'android'
         ? AppSizes.screen.height -

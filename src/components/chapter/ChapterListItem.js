@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {AppColors, AppSizes} from '../../theme';
 import * as ChapterActions from '../../redux/actions/chapter-actions';
-import * as ScansActions from '../../redux/actions/scan-actions';
+import * as ScanActions from '../../redux/actions/scan-actions';
 
 const styles = StyleSheet.create({
   chapterItemView: {
@@ -79,5 +79,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {...ChapterActions, ...ScansActions},
+  {...ChapterActions, ...ScanActions},
 )(ChapterListItem);

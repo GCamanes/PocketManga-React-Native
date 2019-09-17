@@ -9,12 +9,14 @@ import {
   View,
 } from 'react-native';
 import {connect} from 'react-redux';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 import AppConstants from '../../app/app.constants';
 import assets from '../../assets';
 import styles from './scansPage.styles';
 import * as ChapterActions from '../../redux/actions/chapter-actions';
-import {AppColors, AppSizes, AppStyles} from '../../theme';
+import * as ScanActions from '../../redux/actions/scan-actions';
+import {AppColors, AppStyles} from '../../theme';
 
 class ScansPage extends Component {
   constructor(props) {
@@ -24,36 +26,36 @@ class ScansPage extends Component {
     };
   }
 
-  onPressNextPage = () => {
-    const {scans} = this.props;
-    const {currentPageIndex} = this.state;
-    if (currentPageIndex != scans.length - 1) {
-      this.setState({
-        currentPageIndex: currentPageIndex + 1,
-      });
-      // this.props.loadImageRatio(this.props.pages[this.state.currentPageIndex + 1].url);
-    }
-  }
-
-  onPressPreviousPage = () => {
-    const {scans} = this.props;
-    const {currentPageIndex} = this.state;
-    if (currentPageIndex != 0) {
-      this.setState({
-        currentPageIndex: currentPageIndex - 1,
-      });
-      // this.props.loadImageRatio(this.props.pages[this.state.currentPageIndex - 1].url);
-    }
-  }
-
   onPressMarkAsRead = () => {
     const {chapter, markChapterAsRead} = this.props;
     console.log(chapter);
     markChapterAsRead(chapter.id, true, true);
   }
 
+  onSwipeLeft = () => {
+    const {getScanInfos, scans} = this.props;
+    const {currentPageIndex} = this.state;
+    if (currentPageIndex != scans.length - 1) {
+      this.setState({
+        currentPageIndex: currentPageIndex + 1,
+      });
+      getScanInfos(scans[currentPageIndex + 1].url);
+    }
+  }
+
+  onSwipeRight = () => {
+    const {getScanInfos, scans} = this.props;
+    const {currentPageIndex} = this.state;
+    if (currentPageIndex != 0) {
+      this.setState({
+        currentPageIndex: currentPageIndex - 1,
+      });
+      getScanInfos(scans[currentPageIndex - 1].url);
+    }
+  }
+
   render() {
-    const {loadingStatus, scans} = this.props;
+    const {loadingStatus, loadingScanInfoStatus, scanInfos, scans} = this.props;
     const {currentPageIndex} = this.state;
     if (loadingStatus.loading) {
       return (
@@ -65,37 +67,62 @@ class ScansPage extends Component {
         </View>
       );
     }
+    const swipeConfig = {
+      velocityThreshold: 0,
+      directionalOffsetThreshold: 150,
+    };
+
+    const imgSize = {height: 0, width: 0};
+    const swipeViewSize = {
+      height: styles.swipeView.height,
+      width: styles.swipeView.width,
+      imgRatioHW: styles.swipeView.height / styles.swipeView.width,
+      imgRatioWH: styles.swipeView.width / styles.swipeView.height,
+    };
+    if (scanInfos) {
+      if (scanInfos.imgRatioHW > 1) {
+        if (scanInfos.imgRatioHW < swipeViewSize.imgRatioHW) {
+          imgSize.height = swipeViewSize.width * 0.95 * scanInfos.imgRatioHW;
+          imgSize.width = swipeViewSize.width * 0.95;
+        } else {
+          imgSize.height = swipeViewSize.height * 0.95;
+          imgSize.width = swipeViewSize.height * 0.95 * scanInfos.imgRatioWH;
+        }
+      } else {
+        imgSize.height = swipeViewSize.width * 0.95 * scanInfos.imgRatioHW;
+        imgSize.width = swipeViewSize.width * 0.95;
+      }
+    }
+
     return (
       <View style={styles.mainView}>
-        <View style={styles.leftSideView}>
-          {currentPageIndex !== 0 && (
-            <TouchableOpacity style={styles.leftSideTouchableView} onPress={this.onPressPreviousPage}>
-              <Image source={assets.leftChevron} style={styles.image} />
-            </TouchableOpacity>
+        <GestureRecognizer
+          onSwipeLeft={this.onSwipeLeft}
+          onSwipeRight={this.onSwipeRight}
+          config={swipeConfig}
+          style={styles.swipeView}
+        >
+          {loadingScanInfoStatus.loading && (
+            <View style={AppStyles.loadingView}>
+              <ActivityIndicator
+                size="large"
+                color={AppColors.palette.main.secondary}
+              />
+            </View>
           )}
-        </View>
-        <View style={styles.centerView}>
-          <Image
-            source={{uri: scans[currentPageIndex].url}}
-            style={{height: 100, width: 100}}
-          />
-        </View>
-        <View style={styles.rightSideView}>
-          <TouchableOpacity
-            style={styles.rightSideTouchableView}
-            onPress={
-              currentPageIndex !== scans.length - 1
-                ? this.onPressNextPage
-                : this.onPressMarkAsRead
-            }>
+          {!loadingScanInfoStatus.loading && (
             <Image
-              source={
-                currentPageIndex !== scans.length - 1
-                  ? assets.rightChevron
-                  : assets.asRead
-              }
-              style={styles.image}
+              source={{uri: scans[currentPageIndex].url}}
+              style={{
+                width: imgSize.width,
+                height: imgSize.height,
+              }}
             />
+          )}
+        </GestureRecognizer>
+        <View style={styles.bottomView}>
+          <TouchableOpacity onPress={this.onPressMarkAsRead}>
+            <Image source={assets.asRead} style={styles.image} />
           </TouchableOpacity>
         </View>
       </View>
@@ -110,13 +137,18 @@ ScansPage.propTypes = {
     isRead: PropTypes.bool.isRequired,
   }),
   connectivity: PropTypes.bool.isRequired,
+  getScanInfos: PropTypes.func.isRequired,
   loadingStatus: PropTypes.object,
+  loadingScanInfoStatus: PropTypes.object,
   markChapterAsRead: PropTypes.func.isRequired,
+  scanInfos: PropTypes.object,
   scans: PropTypes.arrayOf(PropTypes.object),
 };
 
 ScansPage.defaultProps = {
   loadingStatus: {loading: false},
+  loadingScanInfoStatus: {loading: false},
+  scanInfos: null,
   scans: [],
 };
 
@@ -124,10 +156,12 @@ ScansPage.defaultProps = {
 const mapStateToProps = state => ({
   connectivity: state.app.connectivity,
   loadingStatus: state.app[AppConstants.ROUTES.SCANS],
+  loadingScanInfoStatus: state.app[AppConstants.ROUTES.SCAN_INFOS],
+  scanInfos: state.scan.scanInfos,
   scans: state.scan.scans,
 });
 
 export default connect(
   mapStateToProps,
-  ChapterActions,
+  {...ChapterActions, ...ScanActions},
 )(ScansPage);

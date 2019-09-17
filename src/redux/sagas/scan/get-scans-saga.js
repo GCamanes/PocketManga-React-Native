@@ -22,6 +22,10 @@ export function* getScansSaga(action) {
       .doc(chapter.id)
       .get();
     yield put({
+      type: AppConstants.EVENTS.GET_SCAN_INFOS_SAGA,
+      payload: scansData._data.pages[0].url,
+    })
+    yield put({
       type: AppConstants.EVENTS.SET_SCANS_REDUX,
       payload: scansData._data.pages,
     });

@@ -6,3 +6,10 @@ export function getScans(manga, chapter) {
     payload: {manga, chapter},
   };
 }
+
+export function getScanInfos(url) {
+  return {
+    type: AppConstants.EVENTS.GET_SCAN_INFOS_SAGA,
+    payload: url,
+  };
+}

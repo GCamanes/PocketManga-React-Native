@@ -23,8 +23,8 @@ export class LogoutButton extends Component {
         }}>
         <Image
           style={{
-            height: 40,
-            width: 40,
+            height: 30,
+            width: 30,
             marginStart: 10,
           }}
           source={assets.logout}
