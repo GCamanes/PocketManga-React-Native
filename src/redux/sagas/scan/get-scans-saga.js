@@ -10,6 +10,10 @@ export function* getScansSaga(action) {
   });
   try {
     const {chapter, manga} = action.payload;
+    yield put({
+      type: AppConstants.EVENTS.SET_PAGE_REDUX,
+      payload: null,
+    })
     Actions.jump(AppConstants.ROUTES.SCANS, {
       title: `Chapter ${chapter.number}`,
       chapter,
@@ -23,7 +27,11 @@ export function* getScansSaga(action) {
       .get();
     yield put({
       type: AppConstants.EVENTS.GET_SCAN_INFOS_SAGA,
-      payload: scansData._data.pages[0].url,
+      payload: {
+        url: scansData._data.pages[0].url,
+        index: 0,
+        total: scansData._data.pages.length,
+      },
     })
     yield put({
       type: AppConstants.EVENTS.SET_SCANS_REDUX,

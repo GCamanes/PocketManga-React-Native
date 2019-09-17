@@ -3,6 +3,7 @@ import AppConstants from '../../app/app.constants';
 const initialState = {
   scans: [],
   scanInfos: null,
+  page: null,
 };
 
 const scanReducer = (state = initialState, action) => {
@@ -17,6 +18,12 @@ const scanReducer = (state = initialState, action) => {
       return {
         ...state,
         scanInfos: action.payload,
+      };
+    }
+    case AppConstants.EVENTS.SET_PAGE_REDUX: {
+      return {
+        ...state,
+        page: action.payload,
       };
     }
     case AppConstants.EVENTS.CLEAR_SCANS_REDUCER: {

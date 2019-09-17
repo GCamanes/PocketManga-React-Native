@@ -39,7 +39,11 @@ class ScansPage extends Component {
       this.setState({
         currentPageIndex: currentPageIndex + 1,
       });
-      getScanInfos(scans[currentPageIndex + 1].url);
+      getScanInfos(
+        scans[currentPageIndex + 1].url,
+        currentPageIndex + 1,
+        scans.length,
+      );
     }
   }
 
@@ -50,7 +54,11 @@ class ScansPage extends Component {
       this.setState({
         currentPageIndex: currentPageIndex - 1,
       });
-      getScanInfos(scans[currentPageIndex - 1].url);
+      getScanInfos(
+        scans[currentPageIndex - 1].url,
+        currentPageIndex - 1,
+        scans.length,
+      );
     }
   }
 
