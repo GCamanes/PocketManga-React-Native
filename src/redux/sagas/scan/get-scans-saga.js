@@ -13,7 +13,6 @@ export function* getScansSaga(action) {
     Actions.jump(AppConstants.ROUTES.SCANS, {
       title: `Chapter ${chapter.number}`,
       chapter,
-      manga,
     });
     const scansData = yield firebase
       .firestore()

@@ -24,7 +24,8 @@ export default {
     color: Colors.palette.white,
     fontWeight: 'bold',
     fontFamily: Fonts.base.family,
-    fontSize: Fonts.t24.size,
+    fontSize: Fonts.t22.size,
+    marginLeft: -5,
   },
   navbarButton: {
     tintColor: '#ffffff',

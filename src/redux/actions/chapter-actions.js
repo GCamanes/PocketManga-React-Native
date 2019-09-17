@@ -4,9 +4,9 @@ export function getChapters(manga) {
   return {type: AppConstants.EVENTS.GET_CHAPTERS_SAGA, payload: manga};
 }
 
-export function markChapterAsRead(id, isRead) {
+export function markChapterAsRead(id, isRead, routerPop = false) {
   return {
     type: AppConstants.EVENTS.MARK_CHAPTER_READ_SAGA,
-    payload: {id, isRead},
+    payload: {id, isRead, routerPop},
   };
 }

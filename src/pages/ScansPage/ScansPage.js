@@ -11,21 +11,50 @@ import {
 import {connect} from 'react-redux';
 
 import AppConstants from '../../app/app.constants';
-import styles from './scansPage.styles';
-import {AppColors, AppSizes, AppStyles} from '../../theme';
 import assets from '../../assets';
+import styles from './scansPage.styles';
+import * as ChapterActions from '../../redux/actions/chapter-actions';
+import {AppColors, AppSizes, AppStyles} from '../../theme';
 
 class ScansPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      currentPageIndex: 0,
+    };
   }
 
-  /**
-   * Render function to display component.
-   */
+  onPressNextPage = () => {
+    const {scans} = this.props;
+    const {currentPageIndex} = this.state;
+    if (currentPageIndex != scans.length - 1) {
+      this.setState({
+        currentPageIndex: currentPageIndex + 1,
+      });
+      // this.props.loadImageRatio(this.props.pages[this.state.currentPageIndex + 1].url);
+    }
+  }
+
+  onPressPreviousPage = () => {
+    const {scans} = this.props;
+    const {currentPageIndex} = this.state;
+    if (currentPageIndex != 0) {
+      this.setState({
+        currentPageIndex: currentPageIndex - 1,
+      });
+      // this.props.loadImageRatio(this.props.pages[this.state.currentPageIndex - 1].url);
+    }
+  }
+
+  onPressMarkAsRead = () => {
+    const {chapter, markChapterAsRead} = this.props;
+    console.log(chapter);
+    markChapterAsRead(chapter.id, true, true);
+  }
+
   render() {
-    const {loadingStatus} = this.props;
+    const {loadingStatus, scans} = this.props;
+    const {currentPageIndex} = this.state;
     if (loadingStatus.loading) {
       return (
         <View style={AppStyles.loadingView}>
@@ -37,26 +66,52 @@ class ScansPage extends Component {
       );
     }
     return (
-      <View style={styles.modalView}>
-        <TouchableOpacity style={[styles.sideView, styles.leftSideView]}>
-          <Image source={assets.leftChevron} style={styles.image} />
-        </TouchableOpacity>
-        <View style={styles.bottomView}>
-          <View style={{height: 40, width: 100}}>
-            <Text>bottom</Text>
-          </View>
+      <View style={styles.mainView}>
+        <View style={styles.leftSideView}>
+          {currentPageIndex !== 0 && (
+            <TouchableOpacity style={styles.leftSideTouchableView} onPress={this.onPressPreviousPage}>
+              <Image source={assets.leftChevron} style={styles.image} />
+            </TouchableOpacity>
+          )}
         </View>
-        <TouchableOpacity style={[styles.sideView, styles.rightSideView]}>
-          <Image source={assets.rightChevron} style={styles.image} />
-        </TouchableOpacity>
+        <View style={styles.centerView}>
+          <Image
+            source={{uri: scans[currentPageIndex].url}}
+            style={{height: 100, width: 100}}
+          />
+        </View>
+        <View style={styles.rightSideView}>
+          <TouchableOpacity
+            style={styles.rightSideTouchableView}
+            onPress={
+              currentPageIndex !== scans.length - 1
+                ? this.onPressNextPage
+                : this.onPressMarkAsRead
+            }>
+            <Image
+              source={
+                currentPageIndex !== scans.length - 1
+                  ? assets.rightChevron
+                  : assets.asRead
+              }
+              style={styles.image}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 
 ScansPage.propTypes = {
+  chapter: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+    isRead: PropTypes.bool.isRequired,
+  }),
   connectivity: PropTypes.bool.isRequired,
   loadingStatus: PropTypes.object,
+  markChapterAsRead: PropTypes.func.isRequired,
   scans: PropTypes.arrayOf(PropTypes.object),
 };
 
@@ -74,5 +129,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null,
+  ChapterActions,
 )(ScansPage);

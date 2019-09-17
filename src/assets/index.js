@@ -1,4 +1,5 @@
 const assets = {
+  asRead: require('./as-read-icon.png'),
   delete: require('./delete-icon.png'),
   downChevron: require('./chevron-down-icon.png'),
   favoriteOff: require('./favorite-off-icon.png'),
