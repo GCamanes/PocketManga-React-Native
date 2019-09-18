@@ -87,53 +87,55 @@ class ScansPage extends Component {
     };
 
     const imgSize = {height: 0, width: 0};
-    const swipeViewSize = {
-      height: styles.swipeView.height,
-      width: styles.swipeView.width,
-      imgRatioHW: styles.swipeView.height / styles.swipeView.width,
-      imgRatioWH: styles.swipeView.width / styles.swipeView.height,
+    const scanViewSize = {
+      height: styles.scanView.height,
+      width: styles.scanView.width,
+      imgRatioHW: styles.scanView.height / styles.scanView.width,
+      imgRatioWH: styles.scanView.width / styles.scanView.height,
     };
     if (scanInfos) {
       if (scanInfos.imgRatioHW > 1) {
-        if (scanInfos.imgRatioHW < swipeViewSize.imgRatioHW) {
-          imgSize.height = swipeViewSize.width * 0.95 * scanInfos.imgRatioHW;
-          imgSize.width = swipeViewSize.width * 0.95;
+        if (scanInfos.imgRatioHW < scanViewSize.imgRatioHW) {
+          imgSize.height = scanViewSize.width * 0.95 * scanInfos.imgRatioHW;
+          imgSize.width = scanViewSize.width * 0.95;
         } else {
-          imgSize.height = swipeViewSize.height * 0.95;
-          imgSize.width = swipeViewSize.height * 0.95 * scanInfos.imgRatioWH;
+          imgSize.height = scanViewSize.height * 0.95;
+          imgSize.width = scanViewSize.height * 0.95 * scanInfos.imgRatioWH;
         }
       } else {
-        imgSize.height = swipeViewSize.width * 0.95 * scanInfos.imgRatioHW;
-        imgSize.width = swipeViewSize.width * 0.95;
+        imgSize.height = scanViewSize.width * 0.95 * scanInfos.imgRatioHW;
+        imgSize.width = scanViewSize.width * 0.95;
       }
     }
 
     return (
       <View style={styles.mainView}>
-        <GestureRecognizer
-          onSwipeLeft={this.onSwipeLeft}
-          onSwipeRight={this.onSwipeRight}
-          config={swipeConfig}
-          style={styles.swipeView}
-        >
-          {loadingScanInfoStatus.loading && (
-            <View style={AppStyles.loadingView}>
-              <ActivityIndicator
-                size="large"
-                color={AppColors.palette.main.secondary}
+        {!zoom && (
+          <GestureRecognizer
+            onSwipeLeft={this.onSwipeLeft}
+            onSwipeRight={this.onSwipeRight}
+            config={swipeConfig}
+            style={styles.scanView}
+          >
+            {loadingScanInfoStatus.loading && (
+              <View style={AppStyles.loadingView}>
+                <ActivityIndicator
+                  size="large"
+                  color={AppColors.palette.main.secondary}
+                />
+              </View>
+            )}
+            {!loadingScanInfoStatus.loading && (
+              <Image
+                source={{uri: scans[currentPageIndex].url}}
+                style={{
+                  width: imgSize.width,
+                  height: imgSize.height,
+                }}
               />
-            </View>
-          )}
-          {!loadingScanInfoStatus.loading && (
-            <Image
-              source={{uri: scans[currentPageIndex].url}}
-              style={{
-                width: imgSize.width,
-                height: imgSize.height,
-              }}
-            />
-          )}
-        </GestureRecognizer>
+            )}
+          </GestureRecognizer>
+        )}
         <View style={styles.bottomView}>
           <TouchableOpacity onPress={this.onPressMarkAsRead}>
             <Image source={assets.asRead} style={styles.image} />

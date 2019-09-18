@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.palette.white,
     alignItems: 'center',
   },
-  swipeView: {
+  scanView: {
     backgroundColor: AppColors.palette.white,
     height:
       Platform.OS === 'android'
