@@ -14,6 +14,7 @@ import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/R
 
 import AppConstants from '../../app/app.constants';
 import assets from '../../assets';
+import showAlert from '../../utils/showAlert';
 import styles from './scansPage.styles';
 import * as ChapterActions from '../../redux/actions/chapter-actions';
 import * as ScanActions from '../../redux/actions/scan-actions';
@@ -35,32 +36,40 @@ class ScansPage extends Component {
   }
 
   onSwipeLeft = () => {
-    const {getScanInfos, scans} = this.props;
+    const {connectivity, getScanInfos, scans} = this.props;
     const {currentPageIndex} = this.state;
     if (currentPageIndex != scans.length - 1) {
-      this.setState({
-        currentPageIndex: currentPageIndex + 1,
-      });
-      getScanInfos(
-        scans[currentPageIndex + 1].url,
-        currentPageIndex + 1,
-        scans.length,
-      );
+      if (connectivity) {
+        this.setState({
+          currentPageIndex: currentPageIndex + 1,
+        });
+        getScanInfos(
+          scans[currentPageIndex + 1].url,
+          currentPageIndex + 1,
+          scans.length,
+        );
+      } else {
+        showAlert('No internet connection');
+      }
     }
   }
 
   onSwipeRight = () => {
-    const {getScanInfos, scans} = this.props;
+    const {connectivity, getScanInfos, scans} = this.props;
     const {currentPageIndex} = this.state;
     if (currentPageIndex != 0) {
-      this.setState({
-        currentPageIndex: currentPageIndex - 1,
-      });
-      getScanInfos(
-        scans[currentPageIndex - 1].url,
-        currentPageIndex - 1,
-        scans.length,
-      );
+      if (connectivity) {
+        this.setState({
+          currentPageIndex: currentPageIndex - 1,
+        });
+        getScanInfos(
+          scans[currentPageIndex - 1].url,
+          currentPageIndex - 1,
+          scans.length,
+        );
+      } else {
+        showAlert('No internet connection');
+      }
     }
   }
 

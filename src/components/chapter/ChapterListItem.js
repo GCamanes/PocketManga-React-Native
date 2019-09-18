@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {AppColors, AppSizes} from '../../theme';
 import * as ChapterActions from '../../redux/actions/chapter-actions';
 import * as ScanActions from '../../redux/actions/scan-actions';
+import showAlert from '../../utils/showAlert';
 
 const styles = StyleSheet.create({
   chapterItemView: {
@@ -27,7 +28,7 @@ export class ChapterListItem extends React.Component {
     if (this.props.connectivity) {
       getScans(manga, chapter);
     } else {
-      Alert.alert('Warning', 'No internet connection.');
+      showAlert('No internet connection');
     }
   }
 

@@ -8,6 +8,7 @@ import styles from './mangaListItem.styles';
 import * as ChapterActions from '../../redux/actions/chapter-actions';
 import * as MangaActions from '../../redux/actions/manga-actions';
 import {AppColors} from '../../theme';
+import showAlert from '../../utils/showAlert';
 
 export class MangaListItem extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export class MangaListItem extends React.Component {
     if (connectivity) {
       getChapters(manga.name);
     } else {
-      Alert.alert('Warning', 'No internet connection.');
+      showAlert('No internet connection');
     }
   };
 

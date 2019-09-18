@@ -1,17 +1,17 @@
 import firebase from 'react-native-firebase';
-import {Alert} from 'react-native';
 import {put, takeLatest} from 'redux-saga/effects';
 import {Actions} from 'react-native-router-flux';
 
 import AppConstants from '../../../app/app.constants';
 import Storage from '../../../utils/storage';
+import showAlert from '../../../utils/showAlert';
 
 const getUserInfos = async () => {
   let userMail = '';
   let userPassword = '';
   try {
-    userMail = await Storage.getItem('userMail') || '';
-    userPassword = await Storage.getItem('userPassword') || '';
+    userMail = (await Storage.getItem('userMail')) || '';
+    userPassword = (await Storage.getItem('userPassword')) || '';
   } catch (error) {
     // Error retrieving data
     console.log(error.message);
@@ -44,7 +44,7 @@ export function* loginSaga(action) {
     Actions.reset(AppConstants.ROUTES.HOME);
   } catch (error) {
     console.log('error', error);
-    Alert.alert('Error', 'Wrong mail or password.');
+    showAlert('Wrong mail or password', 'Error');
   }
   yield put({
     type: AppConstants.EVENTS.SET_LOADER,

@@ -1,7 +1,8 @@
 import firebase from 'react-native-firebase';
-import { put, takeLatest } from '@redux-saga/core/effects';
+import {put, takeLatest} from '@redux-saga/core/effects';
 import AppConstants from '../../../app/app.constants';
 import Storage from '../../../utils/storage';
+import showAlert from '../../../utils/showAlert';
 
 export function* getMangasSaga(action) {
   yield put({
@@ -37,6 +38,7 @@ export function* getMangasSaga(action) {
     });
   } catch (error) {
     console.log('\nerror is getMangasSaga', error);
+    showAlert('Error while getting Firebase data', 'Error');
   }
   yield put({
     type: AppConstants.EVENTS.SET_LOADER,

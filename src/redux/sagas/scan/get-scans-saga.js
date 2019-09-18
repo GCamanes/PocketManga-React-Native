@@ -2,6 +2,7 @@ import firebase from 'react-native-firebase';
 import {Actions} from 'react-native-router-flux';
 import {put, takeLatest} from '@redux-saga/core/effects';
 import AppConstants from '../../../app/app.constants';
+import showAlert from '../../../utils/showAlert';
 
 export function* getScansSaga(action) {
   yield put({
@@ -39,6 +40,7 @@ export function* getScansSaga(action) {
     });
   } catch (error) {
     console.log('\nerror is getScansSaga', error);
+    showAlert('Error while getting Firebase data', 'Error');
   }
   yield put({
     type: AppConstants.EVENTS.SET_LOADER,

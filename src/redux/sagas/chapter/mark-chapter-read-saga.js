@@ -2,6 +2,7 @@ import {put, takeLatest} from '@redux-saga/core/effects';
 import {Actions} from 'react-native-router-flux';
 import AppConstants from '../../../app/app.constants';
 import Storage from '../../../utils/storage';
+import showAlert from '../../../utils/showAlert';
 
 export function* markChapterReadSaga(action) {
   try {
@@ -18,6 +19,7 @@ export function* markChapterReadSaga(action) {
     if (payload.routerPop) Actions.pop();
   } catch (error) {
     console.log('\nerror is markMangaFavoriteSaga', error);
+    showAlert('Error while getting Firebase data', 'Error');
   }
 }
 

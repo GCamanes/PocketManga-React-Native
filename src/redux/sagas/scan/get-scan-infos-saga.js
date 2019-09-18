@@ -1,6 +1,7 @@
 import {Image} from 'react-native';
 import {put, takeLatest} from '@redux-saga/core/effects';
 import AppConstants from '../../../app/app.constants';
+import showAlert from '../../../utils/showAlert';
 
 export function* getScanInfosSaga(action) {
   yield put({
@@ -35,6 +36,7 @@ export function* getScanInfosSaga(action) {
     });
   } catch (error) {
     console.log('\nerror is getScanInfosSaga', error);
+    showAlert('Error while getting image size', 'Error');
   }
   yield put({
     type: AppConstants.EVENTS.SET_LOADER,

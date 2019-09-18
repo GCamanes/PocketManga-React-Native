@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {
   ActivityIndicator,
-  Alert,
   ImageBackground,
   Switch,
   Text,
@@ -14,6 +13,7 @@ import {connect} from 'react-redux';
 
 import AppConstants from '../../app/app.constants';
 import assets from '../../assets';
+import showAlert from '../../utils/showAlert';
 import styles from './userLoginPage.styles';
 import * as UserActions from '../../redux/actions/user-actions';
 import {AppColors} from '../../theme';
@@ -47,10 +47,10 @@ class UserLoginPage extends Component {
       if (userMail !== '' && userPassword !== '') {
         login(this.state);
       } else {
-        Alert.alert('Warning', 'Please give a mail and a password.');
+        showAlert('Please give a mail and a password');
       }
     } else {
-      Alert.alert('Warning', 'No internet connection.');
+      showAlert('No internet connection');
     }
   }
 
