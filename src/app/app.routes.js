@@ -16,7 +16,7 @@ import UserLoginPage from '../pages/UserLoginPage/UserLoginPage';
 const AppRoutes = Actions.create(
   <Scene key="root" {...AppConfig.sceneProps}>
     <Scene key={AppConstants.ROUTES.CHAPTERS} component={ChaptersPage} />
-    <Scene key={AppConstants.ROUTES.HOME} component={HomePage} title="Pocket Manga v1.0.0" renderLeftButton={<LogoutButton/>} />
+    <Scene key={AppConstants.ROUTES.HOME} component={HomePage} title="Pocket Manga v1.0.1" renderLeftButton={<LogoutButton/>} />
     <Scene key={AppConstants.ROUTES.USER_LOGIN} component={UserLoginPage} hideNavBar initial />
     <Scene key={AppConstants.ROUTES.SCANS} component={ScansPage} renderRightButton={<PageCount/>} />
   </Scene>,
