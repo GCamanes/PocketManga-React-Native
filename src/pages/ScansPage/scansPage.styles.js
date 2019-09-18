@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     height:
       Platform.OS === 'android'
         ? AppSizes.screen.height - AppStyles.navbar.height - StatusBar.currentHeight - bottomHeight
-        : AppSizes.screen.height - AppStyles.navbar.height - styles.bottomView.height - bottomHeight,
+        : AppSizes.screen.height - AppStyles.navbar.height - bottomHeight,
     width: AppSizes.screen.width,
     justifyContent: 'center',
     alignItems: 'center',

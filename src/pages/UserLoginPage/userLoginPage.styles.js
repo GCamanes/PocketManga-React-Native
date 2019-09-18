@@ -1,7 +1,5 @@
-import {
-  StyleSheet,
-} from 'react-native';
-import { AppColors, AppFonts, AppSizes } from '../../theme';
+import {StyleSheet} from 'react-native';
+import {AppColors, AppFonts, AppSizes} from '../../theme';
 
 const styles = StyleSheet.create({
   backgroundImage: {
