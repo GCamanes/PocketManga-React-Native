@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import GestureRecognizer from 'react-native-swipe-gestures';
+import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 import AppConstants from '../../app/app.constants';
 import assets from '../../assets';
@@ -64,12 +65,20 @@ class ScansPage extends Component {
   }
 
   onToggleSwitchZoom = value => {
-    const {updateZoom, zoom} = this.props;
-    updateZoom(!zoom);
+    const {loadingScanInfoStatus, updateZoom, zoom} = this.props;
+    if (!loadingScanInfoStatus.loading) {
+      updateZoom(!zoom);
+    }
   };
 
   render() {
-    const {loadingStatus, loadingScanInfoStatus, scanInfos, scans, zoom} = this.props;
+    const {
+      loadingStatus,
+      loadingScanInfoStatus,
+      scanInfos,
+      scans,
+      zoom,
+    } = this.props;
     const {currentPageIndex} = this.state;
     if (loadingStatus.loading) {
       return (
@@ -136,11 +145,29 @@ class ScansPage extends Component {
             )}
           </GestureRecognizer>
         )}
+        {zoom && !loadingScanInfoStatus.loading && (
+          <ReactNativeZoomableView
+            maxZoom={2.0}
+            minZoom={1}
+            zoomStep={0.5}
+            initialZoom={1}
+            bindToBorders={true}
+            style={styles.scanView}
+          >
+            <Image
+              source={{uri: scans[currentPageIndex].url}}
+              style={{
+                width: imgSize.width,
+                height: imgSize.height,
+              }}
+            />
+          </ReactNativeZoomableView>
+        )}
         <View style={styles.bottomView}>
           <TouchableOpacity onPress={this.onPressMarkAsRead}>
             <Image source={assets.asRead} style={styles.image} />
           </TouchableOpacity>
-          <Text style={styles.zoomText}>ZOOM</Text>
+          <Text style={styles.zoomText}>SWIPE</Text>
           <Switch
             onValueChange={this.onToggleSwitchZoom}
             value={zoom}
@@ -148,8 +175,9 @@ class ScansPage extends Component {
               true: AppColors.palette.main.primary,
               false: AppColors.palette.main.primary,
             }}
-            thumbColor={zoom ? AppColors.palette.black : AppColors.palette.grey}
+            thumbColor={AppColors.palette.black}
           />
+          <Text style={styles.zoomText}>ZOOM</Text>
         </View>
       </View>
     );

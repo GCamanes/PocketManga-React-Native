@@ -9,6 +9,7 @@
     "android": "react-native run-android"
   },
   "dependencies": {
+    "@dudigital/react-native-zoomable-view": "^1.0.14",
     "@react-native-community/async-storage": "^1.6.1",
     "@react-native-community/netinfo": "^4.2.1",
     "prop-types": "^15.7.2",
