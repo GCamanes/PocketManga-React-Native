@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {
   ActivityIndicator,
-  Alert,
   Image,
+  Switch,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import {connect} from 'react-redux';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 import AppConstants from '../../app/app.constants';
 import assets from '../../assets';
@@ -23,6 +23,7 @@ class ScansPage extends Component {
     super(props);
     this.state = {
       currentPageIndex: 0,
+      zoom: false,
     };
   }
 
@@ -62,8 +63,13 @@ class ScansPage extends Component {
     }
   }
 
+  onToggleSwitchZoom = value => {
+    const {updateZoom, zoom} = this.props;
+    updateZoom(!zoom);
+  };
+
   render() {
-    const {loadingStatus, loadingScanInfoStatus, scanInfos, scans} = this.props;
+    const {loadingStatus, loadingScanInfoStatus, scanInfos, scans, zoom} = this.props;
     const {currentPageIndex} = this.state;
     if (loadingStatus.loading) {
       return (
@@ -132,6 +138,16 @@ class ScansPage extends Component {
           <TouchableOpacity onPress={this.onPressMarkAsRead}>
             <Image source={assets.asRead} style={styles.image} />
           </TouchableOpacity>
+          <Text style={styles.zoomText}>ZOOM</Text>
+          <Switch
+            onValueChange={this.onToggleSwitchZoom}
+            value={zoom}
+            trackColor={{
+              true: AppColors.palette.main.primary,
+              false: AppColors.palette.main.primary,
+            }}
+            thumbColor={zoom ? AppColors.palette.black : AppColors.palette.grey}
+          />
         </View>
       </View>
     );
@@ -151,6 +167,7 @@ ScansPage.propTypes = {
   markChapterAsRead: PropTypes.func.isRequired,
   scanInfos: PropTypes.object,
   scans: PropTypes.arrayOf(PropTypes.object),
+  updateZoom: PropTypes.func.isRequired,
 };
 
 ScansPage.defaultProps = {
@@ -167,6 +184,7 @@ const mapStateToProps = state => ({
   loadingScanInfoStatus: state.app[AppConstants.ROUTES.SCAN_INFOS],
   scanInfos: state.scan.scanInfos,
   scans: state.scan.scans,
+  zoom: state.scan.zoom,
 });
 
 export default connect(

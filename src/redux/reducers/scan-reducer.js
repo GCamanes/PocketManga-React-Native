@@ -4,6 +4,7 @@ const initialState = {
   scans: [],
   scanInfos: null,
   page: null,
+  zoom: false,
 };
 
 const scanReducer = (state = initialState, action) => {
@@ -24,6 +25,12 @@ const scanReducer = (state = initialState, action) => {
       return {
         ...state,
         page: action.payload,
+      };
+    }
+    case AppConstants.EVENTS.UPDATE_ZOOM_REDUX: {
+      return {
+        ...state,
+        zoom: action.payload,
       };
     }
     case AppConstants.EVENTS.CLEAR_SCANS_REDUCER: {

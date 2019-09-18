@@ -20,9 +20,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bottomView: {
+    flexDirection: 'row',
     height: bottomHeight,
     width: AppSizes.screen.width,
     backgroundColor: AppColors.palette.main.tertiary,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopWidth: 2,
+    borderColor: AppColors.palette.black,
   },
   leftSideView: {
     width: AppSizes.screen.width * 0.09,
@@ -47,8 +52,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    height: AppSizes.screen.width * 0.1,
-    width: AppSizes.screen.width * 0.1,
+    height: AppSizes.screen.width * 0.12,
+    width: AppSizes.screen.width * 0.12,
+    marginRight: 60,
   },
   centerView: {
     backgroundColor: AppColors.palette.white,
@@ -60,6 +66,11 @@ const styles = StyleSheet.create({
         : AppSizes.screen.height - AppStyles.navbar.height,
     width: AppSizes.screen.width * 0.82,
     alignItems: 'center',
+  },
+  zoomText: {
+    color: AppColors.palette.white,
+    fontSize: AppFonts.t18.size,
+    fontWeight: 'bold',
   },
 });
 

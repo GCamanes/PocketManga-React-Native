@@ -8,7 +8,7 @@ export function* getScanInfosSaga(action) {
     payload: {scene: AppConstants.ROUTES.SCAN_INFOS, loading: true},
   });
   try {
-    console.log(action.payload);
+    yield put({type: AppConstants.EVENTS.UPDATE_ZOOM_REDUX, payload: false});
     yield put({
       type: AppConstants.EVENTS.SET_PAGE_REDUX,
       payload: {page: action.payload.index + 1, total: action.payload.total},

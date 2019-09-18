@@ -11,18 +11,16 @@ export class PageCount extends Component {
     return (
       <View
         style={{
-          marginRight: 10,
-          backgroundColor: AppColors.palette.white,
-          borderColor: AppColors.palette.main.tertiary,
-          borderWidth: 2,
+          marginRight: 15,
           paddingHorizontal: 5,
-          width: 100,
+          width: 80,
         }}>
         <Text
           style={{
-            color: AppColors.palette.black,
-            fontSize: AppFonts.t16.size,
-            textAlign: 'center',
+            color: AppColors.palette.white,
+            fontSize: AppFonts.t18.size,
+            textAlign: 'right',
+            fontWeight: 'bold',
           }}>
           {`${page.page}/${page.total}`}
         </Text>

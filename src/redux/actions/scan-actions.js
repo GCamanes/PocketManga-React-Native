@@ -13,3 +13,10 @@ export function getScanInfos(url, index, total) {
     payload: {url, index, total},
   };
 }
+
+export function updateZoom(zoom) {
+  return {
+    type: AppConstants.EVENTS.UPDATE_ZOOM_REDUX,
+    payload: zoom,
+  };
+}
