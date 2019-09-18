@@ -4,6 +4,9 @@ import {Actions, ActionConst} from 'react-native-router-flux';
 import AppConstants from '../../../app/app.constants';
 
 export function* logoutSaga() {
+  yield put({type: AppConstants.EVENTS.CLEAR_CHAPTERS_REDUCER});
+  yield put({type: AppConstants.EVENTS.CLEAR_MANGAS_REDUCER});
+  yield put({type: AppConstants.EVENTS.CLEAR_SCANS_REDUCER});
   yield put({type: AppConstants.EVENTS.LOGOUT_REDUX});
   Actions.reset(AppConstants.ROUTES.USER_LOGIN);
 }
