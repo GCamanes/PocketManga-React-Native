@@ -1,4 +1,4 @@
-import { AppColors, AppStyles } from '../theme';
+import {AppColors, AppStyles} from '../theme';
 
 const AppConfig = {
   sceneProps: {

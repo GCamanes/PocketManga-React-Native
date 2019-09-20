@@ -12,8 +12,9 @@ const styles = StyleSheet.create({
     backgroundColor: AppColors.palette.main.secondary,
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
+    width: AppSizes.screen.width * 0.31,
     height: AppSizes.screen.width * 0.15,
+    margin: 2,
     borderWidth: 3,
     borderColor: AppColors.palette.main.tertiary,
   },
@@ -39,6 +40,7 @@ export class ChapterListItem extends React.Component {
 
   render() {
     const {chapter} = this.props;
+    console.log(chapter);
     return (
       <TouchableOpacity onPress={this.onPressItem} onLongPress={this.onLongPressItem} delayLongPress={1000}>
         <View
