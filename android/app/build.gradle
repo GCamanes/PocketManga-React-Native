@@ -131,8 +131,8 @@ android {
         applicationId "com.pocketmanga"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "1.0.1"
+        versionCode 4
+        versionName "1.1.0"
         multiDexEnabled true
     }
     splits {
